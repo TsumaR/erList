@@ -14,7 +14,7 @@
 
 <script>
 import CardList from '../components/CardList.vue'
-import CardDetail from '../components/CardDetail.vue'
+import CardDetail from '../components/cardDetail.vue'
 
 export default {
   components: {
