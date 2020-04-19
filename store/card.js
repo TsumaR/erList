@@ -39,13 +39,13 @@ export const actions = {
     })
   }),
   // サブコレクションとしてcommentをcardsにバインド
-  initCom: firestoreAction(({ bindFirestoreRef }, payload) => {
-    comment = taskRef.doc(payload.id).collection('comment')
-    bindFirestoreRef('comment', comment)
-  }),
+  // initCom: firestoreAction(({ bindFirestoreRef }) => {
+  //   comment = taskRef.doc(id).collection('comment')
+  //   bindFirestoreRef('comment', comment)
+  // }),
   // commentに要素を追加する
-  addCom: firestoreAction((context, { message }) => {
-    comment.add({
+  addCom: firestoreAction((context, card, { message }) => {
+    taskRef.doc(card.id).collection('comment').add({
       message
     })
   })

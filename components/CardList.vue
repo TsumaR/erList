@@ -69,7 +69,7 @@
             <v-card-actions>
               <v-row justify="center">
                 <v-btn class="ma-2" rounded color="#088A85" dark @click="dialog = false">キャンセル</v-btn>
-                <v-btn class="ma-2" rounded color="#088A85" dark @click="addCom">登録</v-btn>
+                <v-btn class="ma-2" rounded color="#088A85" dark @click="addCom(currentCard)">登録</v-btn>
               </v-row>
             </v-card-actions>
           </v-card>
@@ -104,15 +104,14 @@ export default {
       this.currentCard = card
       this.dialog = true
     },
-
     remove(id) {
       this.$store.dispatch('card/remove', id)
     },
     toggle(card) {
       this.$store.dispatch('card/toggle', card)
     },
-    addCom() {
-      this.$store.dispatch('card/addCom', {
+    addCom(card) {
+      this.$store.dispatch('card/addCom', card, {
         message: this.message
       })
       this.dialog = false

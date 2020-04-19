@@ -14,7 +14,7 @@
 
 <script>
 import CardList from '../components/CardList.vue'
-import CardDetail from '../components/cardDetail.vue'
+import CardDetail from '../components/CardDetail.vue'
 
 export default {
   components: {
@@ -27,7 +27,7 @@ export default {
     },
     donelist() {
       return this.$store.getters['card/pooledErrors'].filter(x => x.status === true)
-    }
+    },
   },
   created() {
     this.$store.dispatch('card/init')
