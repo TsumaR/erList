@@ -4,7 +4,7 @@
       <v-list color="#f4f5fc">
         <v-subheader class="font-weight-bold">{{ title }}</v-subheader>
         <v-col v-for="card in cardlist" :key="card.id" cols="12" class="pt-0">
-          <v-card @click.stop="dialog = true">
+          <v-card>
             <v-card-title>
               <v-checkbox
                 :checked="card.status"
@@ -14,7 +14,7 @@
                 @change="toggle(card)"
               ></v-checkbox>
             </v-card-title>
-            <v-row>
+            <v-row @click.stop="dialog = true">
               <v-col cols="10" md="10">
                 <v-card-text class="pb-0">{{ card.author }}</v-card-text>
               </v-col>
