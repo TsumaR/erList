@@ -64,15 +64,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.theme--light.v-label {
-  color: #000;
-}
-.v-input--selection-controls:not(.v-input--hide-details) .v-input__slot {
-  margin-bottom: 0px;
-}
-.v-application--is-ltr .v-list-item__avatar:first-child {
-  margin-right: 0;
-}
-</style>
