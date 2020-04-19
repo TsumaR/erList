@@ -4,6 +4,7 @@ import firebase from '~/plugins/firebase'
 const db = firebase.firestore()
 // データベースにあるcardを取り出す
 const taskRef = db.collection('card')
+let comment = null
 
 export const state = () => ({
   cards: []
@@ -22,7 +23,7 @@ export const actions = {
         author,
         script,
         error,
-        comment: {},
+        comment,
         status: false
       })
     }
@@ -37,9 +38,15 @@ export const actions = {
       status: !card.status
     })
   }),
-  addCom: firestoreAction((context, {card, comment}) => {
-    taskRef.doc(card.id).collection('comment').add({
-      comment
+  // サブコレクションとしてcommentをcardsにバインド
+  initCom: firestoreAction(({ bindFirestoreRef }, payload) => {
+    comment = taskRef.doc(payload.id).collection('comment')
+    bindFirestoreRef('comment', comment)
+  }),
+  // commentに要素を追加する
+  addCom: firestoreAction((context, { message }) => {
+    comment.add({
+      message
     })
   })
 };

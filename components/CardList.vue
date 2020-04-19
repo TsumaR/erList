@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12" md="12">
       <v-list color="#f4f5fc">
-        <v-subheader class="font-weight-bold">{{ title }}</v-subheader>
+        <v-subheader class="font-weight-bold text-center">{{ title }}</v-subheader>
         <v-col v-for="card in cardlist" :key="card.id" cols="12" class="pt-0">
           <v-card @click.stop="dialogOpen(card)">
             <v-checkbox
@@ -61,7 +61,7 @@
                     <v-card-text class="pb-3">{{ currentCard.comment }}</v-card-text>
                   </v-col>
                   <v-col cols="12">
-                    <v-textarea v-model="comment" label="comment" outlined></v-textarea>
+                    <v-textarea v-model="message" label="Message" outlined></v-textarea>
                   </v-col>
                 </v-row>
               </v-container>
@@ -69,7 +69,7 @@
             <v-card-actions>
               <v-row justify="center">
                 <v-btn class="ma-2" rounded color="#088A85" dark @click="dialog = false">キャンセル</v-btn>
-                <v-btn class="ma-2" rounded color="#088A85" dark @click="addCom(currentCard)">登録</v-btn>
+                <v-btn class="ma-2" rounded color="#088A85" dark @click="addCom">登録</v-btn>
               </v-row>
             </v-card-actions>
           </v-card>
@@ -96,7 +96,7 @@ export default {
     return {
       dialog: false,
       currentCard: null,
-      comment: []
+      message: '',
     }
   },
   methods: {
@@ -112,9 +112,9 @@ export default {
       this.$store.dispatch('card/toggle', card)
     },
     addCom() {
-      this.$store.dispatch('card/addCom',  {
-        comment: this.comment
-      }, card)
+      this.$store.dispatch('card/addCom', {
+        message: this.message
+      })
       this.dialog = false
     }
   }
