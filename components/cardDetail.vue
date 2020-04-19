@@ -45,6 +45,7 @@ export default {
       author: '',
       script: '',
       error: '',
+      comment: {},
       dialog: false,
       menu: false,
       modal: false

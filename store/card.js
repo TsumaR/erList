@@ -15,14 +15,14 @@ export const actions = {
     bindFirestoreRef('cards', taskRef)
   }),
   // 追加
-  add: firestoreAction((context, { title, author, script, error }) => {
+  add: firestoreAction((context, { title, author, script, error}) => {
     if (title.trim()) {
       taskRef.add({
         title,
         author,
         script,
         error,
-        memo,
+        comment: {},
         status: false
       })
     }
@@ -35,6 +35,11 @@ export const actions = {
   toggle: firestoreAction((context, card) => {
     taskRef.doc(card.id).update({
       status: !card.status
+    })
+  }),
+  addCom: firestoreAction((context, {card, comment}) => {
+    taskRef.doc(card.id).collection('comment').add({
+      comment
     })
   })
 };

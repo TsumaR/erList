@@ -15,16 +15,20 @@ export const actions = {
     bindFirestoreRef('cards', taskRef)
   }),
   // 追加
-  add: firestoreAction((context, { title, author, script, error }) => {
+  add: firestoreAction((context, { title, author, script, error, comment }) => {
     if (title.trim()) {
       taskRef.add({
         title,
         author,
         script,
         error,
+        comment,
         status: false
       })
     }
+  }),
+  comment: firestoreAction((context, card) => {
+    taskRef.doc(card.comment).push()
   }),
   // 削除
   remove: firestoreAction((context, id) => {
