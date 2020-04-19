@@ -25,11 +25,15 @@
           </v-card>
 
           <v-dialog v-model="dialog" scrollable>
-            <v-card>
+            <v-card light>
               <v-card-title>Title: {{card.title}}</v-card-title>
-              <v-card-subtitle>{{ card.author }}</v-card-subtitle>
-              <v-card-text class="pb-0">{{ card.script }}</v-card-text>
-              <v-card-text class="pb-0">{{ card.error }}</v-card-text>
+              <v-card-subtitle>Author: {{ card.author }}</v-card-subtitle>
+              <v-divider class="mx-3"></v-divider>
+              <v-card-title>Script</v-card-title>
+              <v-card-text class="pb-3">{{ card.script }}</v-card-text>
+              <v-divider class="mx-3"></v-divider>
+              <v-card-title>Error message</v-card-title>
+              <v-card-text class="pb-3">{{ card.error }}</v-card-text>
             </v-card>
           </v-dialog>
 
