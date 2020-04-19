@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8658c3be-bc44-474c-9714-9264224528ac/deploy-status)](https://app.netlify.com/sites/erlist/deploys)
+
 # erList
 
 > My tiptop Nuxt.js project
