@@ -9,8 +9,7 @@
                 :checked="card.status"
                 color="primary"
                 class="ma-2"
-                @change="toggle(card)"
-                @click.stop="dialogOpen(card)"
+                @click.stop="toggle(card)"
             ></v-checkbox>
             <v-card-title>{{ card.title }}</v-card-title>
             <v-row>
@@ -19,7 +18,7 @@
               </v-col>
               <v-card-actions class="pt-0">
                 <v-col cols="2" md="2">
-                  <v-btn icon color="grey" text dark @click="remove(card.id)">
+                  <v-btn icon color="grey" text dark @click.stop="remove(card.id)">
                     <v-icon>mdi-close-circle-outline</v-icon>
                   </v-btn>
                 </v-col>
