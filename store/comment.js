@@ -3,10 +3,10 @@ import firebase from '~/plugins/firebase'
 
 const db = firebase.firestore()
 // データベースにあるcardを取り出す
-const taskRef = db.collection('card')
+const taskRef = db.collection('comment')
 
 export const state = () => ({
-  cards: []
+  comments: []
 });
 
 export const actions = {
@@ -22,7 +22,6 @@ export const actions = {
         author,
         script,
         error,
-        memo,
         status: false
       })
     }
