@@ -4,7 +4,7 @@
       <v-list color="#f4f5fc">
         <v-subheader class="font-weight-bold">{{ title }}</v-subheader>
         <v-col v-for="card in cardlist" :key="card.id" cols="12" class="pt-0">
-          <v-card>
+          <v-card @click.stop="dialog = true">
             <v-card-title>
               <v-checkbox
                 :checked="card.status"
@@ -14,15 +14,33 @@
                 @change="toggle(card)"
               ></v-checkbox>
             </v-card-title>
-            <v-card-text class="pb-0">{{ card.detail }}</v-card-text>
-            <v-card-actions class="pt-0">
-              <v-col cols="2" md="2">
-                <v-btn icon color="grey" text dark @click="remove(card.id)">
-                  <v-icon>mdi-close-circle-outline</v-icon>
-                </v-btn>
+            <v-row>
+              <v-col cols="10" md="10">
+                <v-card-text class="pb-0">{{ card.author }}</v-card-text>
               </v-col>
-            </v-card-actions>
+              <v-card-actions class="pt-0">
+                <v-col cols="2" md="2">
+                  <v-btn icon color="grey" text dark @click="remove(card.id)">
+                    <v-icon>mdi-close-circle-outline</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-card-actions>
+            </v-row>
           </v-card>
+
+          <v-dialog v-model="dialog" scrollable>
+            <v-card light>
+              <v-card-title>Title: {{card.title}}</v-card-title>
+              <v-card-subtitle>Author: {{ card.author }}</v-card-subtitle>
+              <v-divider class="mx-3"></v-divider>
+              <v-card-title>Script</v-card-title>
+              <v-card-text class="pb-3">{{ card.script }}</v-card-text>
+              <v-divider class="mx-3"></v-divider>
+              <v-card-title>Error message</v-card-title>
+              <v-card-text class="pb-3">{{ card.error }}</v-card-text>
+            </v-card>
+          </v-dialog>
+
         </v-col>
       </v-list>
     </v-col>
@@ -39,6 +57,11 @@ export default {
     cardlist: {
       type: Array,
       default: null
+    }
+  },
+  data() {
+    return {
+      dialog: false
     }
   },
   methods: {
