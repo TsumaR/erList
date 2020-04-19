@@ -14,14 +14,18 @@
                 @change="toggle(card)"
               ></v-checkbox>
             </v-card-title>
-            <v-card-text class="pb-0">{{ card.author }}</v-card-text>
-            <v-card-actions class="pt-0">
-              <v-col cols="2" md="2">
-                <v-btn icon color="grey" text dark @click="remove(card.id)">
-                  <v-icon>mdi-close-circle-outline</v-icon>
-                </v-btn>
+            <v-row>
+              <v-col cols="10" md="10">
+                <v-card-text class="pb-0">{{ card.author }}</v-card-text>
               </v-col>
-            </v-card-actions>
+              <v-card-actions class="pt-0">
+                <v-col cols="2" md="2">
+                  <v-btn icon color="grey" text dark @click="remove(card.id)">
+                    <v-icon>mdi-close-circle-outline</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-card-actions>
+            </v-row>
           </v-card>
 
           <v-dialog v-model="dialog" scrollable>
