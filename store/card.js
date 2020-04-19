@@ -15,11 +15,13 @@ export const actions = {
     bindFirestoreRef('cards', taskRef)
   }),
   // 追加
-  add: firestoreAction((context, { title, detail }) => {
+  add: firestoreAction((context, { title, author, script, error }) => {
     if (title.trim()) {
       taskRef.add({
         title,
-        detail,
+        author,
+        script,
+        error,
         status: false
       })
     }

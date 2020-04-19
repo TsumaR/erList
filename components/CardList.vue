@@ -14,7 +14,7 @@
                 @change="toggle(card)"
               ></v-checkbox>
             </v-card-title>
-            <v-card-text class="pb-0">{{ card.detail }}</v-card-text>
+            <v-card-text class="pb-0">{{ card.author }}</v-card-text>
             <v-card-actions class="pt-0">
               <v-col cols="2" md="2">
                 <v-btn icon color="grey" text dark @click="remove(card.id)">
@@ -26,8 +26,10 @@
 
           <v-dialog v-model="dialog" scrollable>
             <v-card>
-              <v-card-title>Author: {{card.title}}</v-card-title>
-              <v-card-text class="pb-0">{{ card.detail }}</v-card-text>
+              <v-card-title>Title: {{card.title}}</v-card-title>
+              <v-card-subtitle>{{ card.author }}</v-card-subtitle>
+              <v-card-text class="pb-0">{{ card.script }}</v-card-text>
+              <v-card-text class="pb-0">{{ card.error }}</v-card-text>
             </v-card>
           </v-dialog>
 

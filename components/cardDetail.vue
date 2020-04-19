@@ -17,7 +17,13 @@
               <v-text-field v-model="title" label="Title"></v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-textarea v-model="detail" label="Detail"></v-textarea>
+              <v-text-field v-model="author" label="Author"></v-text-field>
+            </v-col>
+            <v-col cols="12">
+              <v-textarea v-model="script" label="Script"></v-textarea>
+            </v-col>
+            <v-col cols="12">
+              <v-textarea v-model="error" label="Error"></v-textarea>
             </v-col>
           </v-row>
         </v-container>
@@ -36,7 +42,9 @@ export default {
   data() {
     return {
       title: '',
-      detail: '',
+      author: '',
+      script: '',
+      error: '',
       dialog: false,
       menu: false,
       modal: false
@@ -46,7 +54,9 @@ export default {
     add() {
       this.$store.dispatch('card/add', {
         title: this.title,
-        detail: this.detail,
+        author: this.author,
+        script: this.script,
+        error: this.error
       })
       this.dialog = false
     }
