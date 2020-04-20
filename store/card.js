@@ -7,7 +7,9 @@ const taskRef = db.collection('card')
 let comment = null
 
 export const state = () => ({
-  cards: []
+  cards: [],
+  comments: [],
+  cardDialog : false,
 });
 
 export const actions = {
@@ -39,13 +41,13 @@ export const actions = {
     })
   }),
   // サブコレクションとしてcommentをcardsにバインド
-  // initCom: firestoreAction(({ bindFirestoreRef }) => {
-  //   comment = taskRef.doc(id).collection('comment')
-  //   bindFirestoreRef('comment', comment)
-  // }),
+  initCom: firestoreAction(({ bindFirestoreRef }, payload) => {
+    comment = taskRef.doc(payload.id).collection('comment')
+    bindFirestoreRef('comments', comment)
+  }),
   // commentに要素を追加する
-  addCom: firestoreAction((context, card, { message }) => {
-    taskRef.doc(card.id).collection('comment').add({
+  addCom: firestoreAction((context, { message }) => {
+    comment.add({
       message
     })
   })
@@ -54,5 +56,17 @@ export const actions = {
 export const getters = {
   pooledErrors (state) {
     return state.cards;
+  },
+  pooledComments (state) {
+    return state.comments;
+  },
+  getDialog (state) {
+    return state.cardDialog;
   }
 };
+
+export const mutations= {
+  changeDialog (state) {
+    state.cardDialog = !state.cardDialog
+  }
+}

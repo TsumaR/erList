@@ -27,52 +27,8 @@
           </v-card>
         </v-col>
 
-        <v-dialog v-model="dialog" v-if="currentCard" scrollable>  
-          <v-card light>
-            <v-card-title>Title: {{currentCard.title}}</v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12">
-                    <v-card-subtitle>Author: {{ currentCard.author }}</v-card-subtitle>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-divider class="mx-3"></v-divider>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-card-title>Script</v-card-title>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-card-text class="pb-3">{{ currentCard.script }}</v-card-text>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-divider class="mx-3"></v-divider>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-card-title>Error message</v-card-title>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-card-text class="pb-3">{{ currentCard.error }}</v-card-text>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-card-title>Chat box</v-card-title>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-card-text class="pb-3">{{ currentCard.comment }}</v-card-text>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-textarea v-model="message" label="Message" outlined></v-textarea>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-row justify="center">
-                <v-btn class="ma-2" rounded color="#088A85" dark @click="dialog = false">キャンセル</v-btn>
-                <v-btn class="ma-2" rounded color="#088A85" dark @click="addCom(currentCard)">登録</v-btn>
-              </v-row>
-            </v-card-actions>
-          </v-card>
+        <v-dialog v-model="carddialog" v-if="currentCard" scrollable>
+          <card-content :currentCard="currentCard"></card-content>
         </v-dialog>
 
       </v-list>
@@ -81,7 +37,17 @@
 </template>
 
 <script>
+import CardContent from '../components/CardContent.vue'
+
 export default {
+  components: {
+    CardContent
+  },
+  computed: {
+    carddialog() {
+      return this.$store.getters['card/getDialog']
+    }
+  },
   props: {
     title: {
       type: String,
@@ -94,15 +60,17 @@ export default {
   },
   data() {
     return {
-      dialog: false,
       currentCard: null,
-      message: '',
+      message: 'aaa'
     }
   },
   methods: {
+    changeDialog() {
+      this.$store.commit('card/changeDialog')
+    },
     dialogOpen(card) {
       this.currentCard = card
-      this.dialog = true
+      this.$store.commit('card/changeDialog')
     },
     remove(id) {
       this.$store.dispatch('card/remove', id)
@@ -110,13 +78,7 @@ export default {
     toggle(card) {
       this.$store.dispatch('card/toggle', card)
     },
-    addCom(card) {
-      this.$store.dispatch('card/addCom', card, {
-        message: this.message
-      })
-      this.dialog = false
-    }
-  }
+  },
 }
 </script>
 
