@@ -29,7 +29,7 @@
             <v-card-title>Chat box</v-card-title>
           </v-col>
           <v-col cols="12">
-            <v-card-text class="pb-3">{{ currentCard }}</v-card-text>
+            <v-card-text class="pb-3">{{ commentlist }}</v-card-text>
           </v-col>
           <v-col cols="12">
             <v-textarea v-model="message" label="Message" outlined></v-textarea>
@@ -47,7 +47,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     currentCard: {
@@ -56,7 +55,7 @@ export default {
   },
   data() {
     return {
-      message: '',
+      message: ''
     }
   },
   methods: {
@@ -68,13 +67,26 @@ export default {
         payload: this.currentCard,
         message: this.message
       })
-      this.$store.commit('card/changeDialog')
     }
   },
+  computed: {
+    commentlist() {
+      return this.$store.getters['card/pooledComments']
+    },
+  },
+  // created() {
+  //   allComments: {
+  //     firebase.firestore().collection('card').doc(this.currentCard.id).collection('comment').get().then(snapshot => {
+  //       snapshot.forEach(doc => {
+  //         this.commentlist.push(doc.data())
+  //       })
+  //     })
+  //   }
+  // }
   // computed: {
   //   commentlist() {
   //     return this.$store.getters['card/pooledComments']
   //   }
-  // }
+  // },
 }
 </script>
