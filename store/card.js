@@ -6,7 +6,9 @@ const db = firebase.firestore()
 const taskRef = db.collection('card')
 
 export const state = () => ({
-  cards: []
+  cards: [],
+  comments: [],
+  cardDialog : false,
 });
 
 export const actions = {
@@ -15,7 +17,7 @@ export const actions = {
     bindFirestoreRef('cards', taskRef)
   }),
   // 追加
-  add: firestoreAction((context, { title, author, script, error }) => {
+  add: firestoreAction((context, { title, author, script, error}) => {
     if (title.trim()) {
       taskRef.add({
         title,
@@ -35,11 +37,31 @@ export const actions = {
     taskRef.doc(card.id).update({
       status: !card.status
     })
+  }),
+
+  // commentに要素を追加する
+
+  addCom: firestoreAction((context, {payload, message}) => {
+    taskRef.doc(payload.id).collection('comment').add({
+      message
+    })
   })
 };
 
 export const getters = {
   pooledErrors (state) {
     return state.cards;
-  }
+  },
+  // pooledComments (state) {
+  //   return state.comments;
+  // },
+  getDialog (state) {
+    return state.cardDialog;
+  },
 };
+
+export const mutations= {
+  changeDialog (state) {
+    state.cardDialog = !state.cardDialog
+  }
+}
