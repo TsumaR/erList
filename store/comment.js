@@ -7,7 +7,7 @@ const taskRef = db.collection('card')
 let comment = null
 
 export const state = () => ({
-  comment: []
+comment: []
 });
 
 export const actions = {
@@ -17,7 +17,7 @@ export const actions = {
     bindFirestoreRef('comment', comment)
   }),
   // commentに要素を追加する
-  addCom: firestoreAction((context, { message }) => {
+  addCom: firestoreAction((context, { text }) => {
     comment.add({
       message
     })
