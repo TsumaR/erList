@@ -25,11 +25,28 @@
           <v-col cols="12">
             <v-card-text class="pb-3">{{ currentCard.error }}</v-card-text>
           </v-col>
-          <v-col cols="12">
+          <!-- <v-col cols="12">
             <v-card-title>Chat box</v-card-title>
-          </v-col>
+          </v-col> -->
           <v-col cols="12">
-            <v-card-text class="pb-3">{{ commentlist }}</v-card-text>
+            <v-card
+              class="mx-auto"
+              tile
+            >
+              <v-list rounded>
+                <v-subheader>Chat Box</v-subheader>
+                  <v-list-item
+                    v-for="comment in commentlist"
+                    :key="comment.id"
+                  >
+                    <v-list-item-content>
+                      <v-list-item-title v-text="comment.message"></v-list-item-title>
+                      <p class="conversation__user-text">{{comment.message}}</p>
+                    </v-list-item-content>
+                  </v-list-item>
+              </v-list>
+            </v-card>
+            <!-- <v-card-text class="pb-3">{{ commentlist }}</v-card-text> -->
           </v-col>
           <v-col cols="12">
             <v-textarea v-model="message" label="Message" outlined></v-textarea>
