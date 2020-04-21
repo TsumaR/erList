@@ -19,7 +19,7 @@ export const actions = {
   }),
   bindComments: firestoreAction(({ bindFirestoreRef }, {payload} ) => {
     commRef = taskRef.doc(payload.id).collection('comment')
-    bindFirestoreRef('comments', commRef)
+    bindFirestoreRef('comments', commRef.orderBy('createdAt'))
   }),
   // 追加
   add: firestoreAction((context, { title, author, script, error}) => {
@@ -44,10 +44,10 @@ export const actions = {
     })
   }),
   // commentに要素を追加する
-  addCom: firestoreAction((context, {payload, message}) => {
-    let commRef = firebase.firestore().collection('card').doc(payload.id).collection('comment')
+  addCom: firestoreAction((context, {payload, message, createdAt}) => {
     commRef.add({
-      message
+      message,
+      createdAt
     })
   })
 };
