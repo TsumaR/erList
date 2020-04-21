@@ -61,7 +61,6 @@ export default {
   data() {
     return {
       currentCard: null,
-      message: 'aaa'
     }
   },
   methods: {
@@ -71,6 +70,7 @@ export default {
     dialogOpen(card) {
       this.currentCard = card
       this.$store.commit('card/changeDialog')
+      this.$store.dispatch('card/bindComments', {payload: this.currentCard})
     },
     remove(id) {
       this.$store.dispatch('card/remove', id)

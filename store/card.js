@@ -4,6 +4,7 @@ import firebase from '~/plugins/firebase'
 const db = firebase.firestore()
 // データベースにあるcardを取り出す
 const taskRef = db.collection('card')
+let commRef = null
 
 export const state = () => ({
   cards: [],
@@ -15,6 +16,10 @@ export const actions = {
   // 初期化
   init: firestoreAction(({ bindFirestoreRef }) => {
     bindFirestoreRef('cards', taskRef)
+  }),
+  bindComments: firestoreAction(({ bindFirestoreRef }, {payload} ) => {
+    commRef = taskRef.doc(payload.id).collection('comment')
+    bindFirestoreRef('comments', commRef)
   }),
   // 追加
   add: firestoreAction((context, { title, author, script, error}) => {
@@ -38,30 +43,27 @@ export const actions = {
       status: !card.status
     })
   }),
-
   // commentに要素を追加する
-
   addCom: firestoreAction((context, {payload, message}) => {
-    taskRef.doc(payload.id).collection('comment').add({
+    let commRef = firebase.firestore().collection('card').doc(payload.id).collection('comment')
+    commRef.add({
       message
     })
   })
 };
-
 export const getters = {
   pooledErrors (state) {
     return state.cards;
   },
-  // pooledComments (state) {
-  //   return state.comments;
-  // },
   getDialog (state) {
     return state.cardDialog;
   },
+  pooledComments (state) {
+    return state.comments;
+  }
 };
-
 export const mutations= {
   changeDialog (state) {
-    state.cardDialog = !state.cardDialog
+    state.cardDialog = !state.cardDialog;
   }
 }
