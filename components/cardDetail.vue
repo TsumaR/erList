@@ -1,10 +1,30 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-btn color="#088A85" dark class="font-weight-bold" v-on="on"
-        ><v-icon small class="mr-2">mdi-plus-circle-outline </v-icon
-        >新規エラーを追加</v-btn
-      >
+      <v-row>
+        <v-col cols="1">
+          <v-img :src="$store.state.userPhoto"
+                 width=100%>
+          </v-img>
+        </v-col>
+        <v-col cols="4">
+          <p>{{ $store.state.userName }}</p>
+        </v-col>
+        <v-col cols="4">
+          <v-btn color="#088A85" dark class="font-weight-bold" v-on="on">
+            <v-icon small class="mr-2">mdi-plus-circle-outline </v-icon>
+            新規エラーを追加
+          </v-btn>
+        </v-col>
+        <v-col cols="2">
+          <v-btn color="primary" dark @click="signOut">
+            ログアウト
+          </v-btn>
+        </v-col>
+ 
+      </v-row>
+
+
     </template>
     <v-card>
       <v-card-title>
@@ -59,6 +79,9 @@ export default {
         error: this.error
       })
       this.dialog = false
+    },
+    signOut() {
+      this.$store.dispatch('googleSignOut')
     }
   },
 }

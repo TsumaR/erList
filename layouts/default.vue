@@ -46,11 +46,13 @@
 </style>
 
 <script>
+
+
 export default {
   data() {
     return {
-      title: 'CardList'
-    }
+      title: 'CardList',
+    };
   }
 }
 </script>
