@@ -1,6 +1,7 @@
 // import firebase from 'firebase/app'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/auth'
 
 // .envからプロジェクトIDを取得して定数に設定
 const config = {
