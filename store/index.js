@@ -26,6 +26,7 @@ export const mutations = {
 }
 
 export const state = () => ({
+  // counter: 0,
   userEmail: null,
   userName: null,
   userPhoto: null,
@@ -52,6 +53,7 @@ export const actions = {
       }
     })
   },
+
   userCheck ({ dispatch, commit, state }) {
     db.collection('users').doc(state.userEmail).get().then((doc) => {
       if (doc.exists) {
@@ -65,6 +67,7 @@ export const actions = {
       console.error("Error getting document:", error)
     })
   },
+
   createUser ({ state }) {
     db.collection('users').doc(state.userEmail).set({
       counter: state.counter
@@ -73,31 +76,5 @@ export const actions = {
     }).catch((error) => {
       console.error("Error writing document: ", error);
     })
-  },
-  increment ({ commit, state }) {
-    db.collection('users').doc(state.userEmail).update({
-      counter: state.counter + 1
-    }).then(() => {
-      console.log("Document successfully updated!")
-      commit('increment')
-    }).catch((error) => {
-      console.error("Error updating document: ", error)
-    })
-  },
-  reset ({ commit, state }) {
-    db.collection('users').doc(state.userEmail).update({
-      counter: 0
-    }).then(() => {
-      console.log("Document successfully 0 updated!")
-      commit('reset')
-    }).catch((error) => {
-      console.error("Error updating document: ", error)
-    })
   }
 }
-
-
-// export const getters = {
-//   isLoggedIn: (state) => state.isLoggedIn,
-//   user: (state) => state.user
-// };
