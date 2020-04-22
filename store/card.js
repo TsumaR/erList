@@ -44,10 +44,12 @@ export const actions = {
     })
   }),
   // commentに要素を追加する
-  addCom: firestoreAction((context, {payload, message, createdAt}) => {
+  addCom: firestoreAction((context, {payload, message, createdAt, userName, userPhoto}) => {
     commRef.add({
       message,
-      createdAt
+      createdAt,
+      userName,
+      userPhoto
     })
   })
 };

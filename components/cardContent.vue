@@ -25,47 +25,28 @@
           <v-col cols="12">
             <v-card-text class="pb-3">{{ currentCard.error }}</v-card-text>
           </v-col>
-          <!-- <v-col cols="12">
-            <v-card-title>Chat box</v-card-title>
-          </v-col> -->
           <v-col cols="12">
-            <!-- ここからchat box -->
-            <!-- <div class="chat-box">
-              <div class="chat-face">
-                <img src="comment.img" alt="chat icon" width='90' height='90'>
-              </div>
-              <div class="chat-area">
-                <div class="chat-text">
-                  {{ comment.message }}
-                </div>
-              </div>
-            </div> -->
-            <v-card
-              class="mx-auto"
-              tile
-            >
-              <v-list rounded>
-                <v-subheader>Chat Box</v-subheader>
-                  <v-list-item
-                    v-for="comment in commentlist"
-                    :key="comment.id"
-                  >
-                    <v-list-item-content>
-                      <!-- <v-list-item-title v-text="comment.message"></v-list-item-title>
-                      <p class="conversation__user-text">{{comment.message}}</p> -->
-                      <!-- <div class="chat-face">
-                        <img src="comment.img" alt="chat icon" width='90' height='90'>
-                      </div> -->
-                      <div class="chat-area">
-                        <div class="chat-hukidashi">
-                          {{ comment.message }}
-                        </div>
-                      </div>
-                    </v-list-item-content>
-                  </v-list-item>
-              </v-list>
-            </v-card>
-            <!-- <v-card-text class="pb-3">{{ commentlist }}</v-card-text> -->
+            <v-row dense>
+              <v-col
+                v-for="comment in commentlist"
+                :key="comment.id"
+                cols="12"
+              >
+                <v-card
+                  color="#E8F5E9"
+                > 
+                  <v-card-title>
+                    <v-avatar>
+                      <v-img :src="comment.userPhoto"></v-img>
+                    </v-avatar>
+                    <span class="title font-weight-light"> {{comment.userName}} </span>
+                  </v-card-title>
+                  <v-card-text>
+                    {{comment.message}}
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
           </v-col>
           <v-col cols="12">
             <v-textarea v-model="message" label="Message" outlined></v-textarea>
@@ -83,6 +64,7 @@
 </template>
 
 <script>
+import 'firebase/firestore'
 export default {
   props: {
     currentCard: {
@@ -103,7 +85,9 @@ export default {
       this.$store.dispatch('card/addCom', {
         payload: this.currentCard,
         message: this.message,
-        createdAt: now
+        createdAt: now,
+        userName: this.$store.state.userName,
+        userPhoto: this.$store.state.userPhoto
       })
     }
   },
@@ -173,5 +157,14 @@ export default {
 }
 .someone {
     background-color: #BCF5A9;
+}
+.chat-face {
+    float: left;
+    margin-right: -120px;
+}
+.chat-face img{
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 4px #ddd;
 }
 </style>

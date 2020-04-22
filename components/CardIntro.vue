@@ -4,10 +4,7 @@
       <Logo/>
     </div>
     <p class="my-8 leading-normal">
-      このサイトは、Qiita アドベントカレンダーの<br>
-      Nuxt.js #2 Advent Calendar 2018 20日目の記事として<br>
-      作成したアプリケーションです。<br>
-      Google アカウントでログインして Nuxt をクリックしてみてください。
+      フロントの勉強に作成したアプリ<br>
     </p>
   </div>
 </template>
