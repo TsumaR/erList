@@ -17,11 +17,12 @@
                 <v-card-text class="pb-0">{{ card.author }}</v-card-text>
               </v-col>
               <v-card-actions class="pt-0">
-                <v-col cols="2" md="2">
+                <!-- 簡単にremoveできないようにした。 -->
+                <!-- <v-col cols="2" md="2">
                   <v-btn icon color="grey" text dark @click.stop="remove(card.id)">
                     <v-icon>mdi-close-circle-outline</v-icon>
                   </v-btn>
-                </v-col>
+                </v-col> -->
               </v-card-actions>
             </v-row>
           </v-card>
