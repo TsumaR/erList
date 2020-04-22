@@ -1,8 +1,37 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-row>
-        <v-col cols="1">
+      <v-card class="overflow-hidden">
+        <v-app-bar
+          color="white"
+        >
+          <v-avatar>
+            <v-img :src="$store.state.userPhoto"></v-img>
+          </v-avatar>
+          <v-toolbar-title>
+            {{ $store.state.userName }}
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" dark @click="signOut">
+            <v-icon small class="mr-2">mdi-minus-circle-outline </v-icon>
+            ログアウト
+          </v-btn>
+          <v-btn color="#088A85" dark class="font-weight-bold" v-on="on">
+            <v-icon small class="mr-2">mdi-plus-circle-outline </v-icon>
+            新規エラーを追加
+          </v-btn>
+        </v-app-bar>
+        <!-- <v-sheet
+          id="scrolling-techniques-6"
+          class="overflow-y-auto"
+          max-height="600"
+        >
+          <v-container style="height: 66px;"></v-container>
+        </v-sheet>         -->
+      </v-card>
+          
+
+        <!-- <v-col cols="1">
           <v-img :src="$store.state.userPhoto"
                  width=100%>
           </v-img>
@@ -20,9 +49,9 @@
           <v-btn color="primary" dark @click="signOut">
             ログアウト
           </v-btn>
-        </v-col>
+        </v-col> -->
  
-      </v-row>
+      
 
 
     </template>
