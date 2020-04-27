@@ -42,6 +42,7 @@ export default {
   */
   modules: [
     '@nuxtjs/dotenv'
+    '@nuxtjs/pwa'
   ],
   /*
   ** vuetify module configuration
