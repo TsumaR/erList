@@ -77,5 +77,17 @@ export default {
   },
   generate: {
     fallback: true
+  },
+  manifest: {
+    name: "erList",
+    title: "erList",
+    'og:title': "erList",
+    description: '課題ごとに会話することでチームの効率化',
+    'og:description': '課題ごとに会話することでチームの効率化',
+    lang: 'ja',
+    theme_color: "#529b58",
+    background_color: "#bde0c0",
+    display: "standalone",
+    scope: "/",
   }
 }
